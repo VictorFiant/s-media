@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { Request, Response, Router, NextFunction } from 'express';
 import { isEmpty } from 'class-validator';
 import { getRepository } from 'typeorm';
 import { makeId } from '../util/helper';
@@ -9,6 +9,7 @@ import User from '../entities/User';
 import Post from '../entities/Post';
 import multer, { FileFilterCallback } from 'multer';
 import path from 'path';
+
 
 
 
@@ -77,6 +78,31 @@ const getSub = async (req: Request, res: Response) => {
     }
 }
 
+
+
+
+/**
+ * 
+ */
+
+const ownSub = async (req: Request, res: Response, next: NextFunction) => {
+    const user: User = res.locals.user
+
+    try {
+        const sub = await Sub.findOneOrFail({ where: { name: req.params.name } })
+        
+        if (sub.username !== user.username) {
+            return res.status(403).json({ error: 'You dont own this sub' })
+        }
+        
+        res.locals.sub = sub
+        return next()
+    } catch (err) {
+        return res.status(500).json({ error: 'Something went wrong' })
+    }
+
+}
+
 /**
  * 
  */
@@ -93,13 +119,13 @@ const upload = multer({
         if (file.mimetype == 'image/jpeg' || file.mimetype == 'image/png') {
             callback(null, true)
         } else {
-            callback(null, true)
+            callback(new Error('Not an image'))
         }
     }
 })
 
 const uploadSubImage = async (req: Request, res: Response) => {
-return res.json({success: true})
+    return res.json({ success: true })
 }
 
 
@@ -107,6 +133,6 @@ const router = Router()
 
 router.post('/', user, auth, createSub)
 router.get('/:name', user, getSub)
-router.post('/:name/image', user, auth, upload.single('file'), uploadSubImage)
+router.post('/:name/image', user, auth, ownSub, upload.single('file'), uploadSubImage)
 
 export default router;
