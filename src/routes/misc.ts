@@ -3,9 +3,11 @@ import Comment from '../entities/Comment'
 import Vote from '../entities/Vote'
 import User from '../entities/User'
 import Post from '../entities/Post'
+import Sub from '../entities/Sub';
 
 import user from "../middleware/user";
 import auth from '../middleware/auth'
+import { getConnection } from 'typeorm';
 
 const vote = async (req: Request, res: Response) => {
     const { identifier, slug, commentIdentifier, value } = req.body
@@ -63,7 +65,11 @@ const vote = async (req: Request, res: Response) => {
 }
 
 
+
+
+
 const router = Router()
 router.post('/vote', user,  auth, vote)
+router.get('/top-subs', topSubs)
 
 export default router;

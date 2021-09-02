@@ -1,4 +1,4 @@
-import { Entity as TOEntity, Column, Index, BeforeInsert, ManyToOne, JoinColumn, OneToMany } from "typeorm";
+import { Entity as TOEntity, Column, Index, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 import Entity from './Entity';
 import User from './User'
 import Post from './Post'
@@ -40,13 +40,15 @@ export default class Sub extends Entity {
 
     @Expose()
     get imageUrl(): string {
-        return this.imageUrn ? `${process.env.APP_URL}/images/${this.imageUrn}`
+        return this.imageUrn
+         ? `${process.env.APP_URL}/images/${this.imageUrn}`
             : 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=robohash&f=y'
     }
 
     @Expose()
     get bannerUrl(): string | undefined {
-        return this.bannerUrn ? `${process.env.APP_URL}/images/${this.bannerUrn}`
+        return this.bannerUrn 
+        ? `${process.env.APP_URL}/images/${this.bannerUrn}`
             : undefined
     }
 
