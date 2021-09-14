@@ -14,7 +14,10 @@ module.exports = {
     constainer: false
   },
   variants: {
-    extend: {},
+    extend: {
+      backgroundColor: ['disabled'],
+      borderColor: ['disabled']
+    },
   },
   plugins: [
     function ({ addComponents }) {

@@ -7,10 +7,7 @@
         @apply inline-block text-xs font-bold text-center uppercase border rounded;
     }
     .button.green{
-        @apply text-white bg-green-600 border-green-600;
-    }
-    .button.green:hover {
-        @apply bg-green-400 border-green-400
+        @apply text-white bg-green-600 border-green-600 hover:bg-green-400 hover:border-green-400 disabled:bg-green-300 disabled:border-green-300;
     }
     .button.green.hollow {
         @apply text-green-600 bg-transparent border-green-600
