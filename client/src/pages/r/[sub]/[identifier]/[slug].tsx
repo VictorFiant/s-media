@@ -11,7 +11,6 @@ import classNames from "classnames";
 import { useAuthState } from "../../../../context/auth";
 import Sidebar from "../../../../components/Sidebar";
 import ActionButton from "../../../../components/ActionButton";
-import { userInfo } from "os";
 import { useState, FormEvent } from "react";
 
 dayjs.extend(relativeTime);
