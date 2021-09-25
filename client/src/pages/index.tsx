@@ -5,10 +5,13 @@ import PostCard from "../components/PostCard";
 import useSWR from "swr";
 import Image from "next/image";
 import Link from "next/link";
+import { useAuthState } from "../context/auth";
 
 export default function Home() {
-  const { data: posts } = useSWR("/posts");
-  const { data: topSubs } = useSWR("/misc/top-subs");
+  const { data: posts } = useSWR<Post[]>("/posts");
+  const { data: topSubs } = useSWR<Sub[]>("/misc/top-subs");
+
+  const { authenticated } = useAuthState();
 
   return (
     <Fragment>
@@ -17,13 +20,13 @@ export default function Home() {
       </Head>
       <div className="container flex pt-4">
         {/** Posts  feed */}
-        <div className="w-160">
+        <div className="w-full px-4 md:w-160 md:p-0">
           {posts?.map((post: Post) => (
             <PostCard post={post} key={post.identifier} />
           ))}
         </div>
         {/* Sidebar */}
-        <div className="ml-6 w-80">
+        <div className="hidden ml-6 w-80 md:block">
           <div className="bg-white rounded">
             <div className="p-4 border-b-2">
               <p className="text-lg font-semibold text-center">
@@ -31,21 +34,22 @@ export default function Home() {
               </p>
             </div>
             <div>
-              {topSubs?.map((sub: Sub) => (
+              {topSubs?.map((sub) => (
                 <div
                   key={sub.name}
                   className="flex items-center px-4 py-2 text-xs border-b"
                 >
-                  <div className="mr-2 overflow-hidden rounded-full cursor-pointer">
-                    <Link href={`/r/${sub.name}`}>
+                  <Link href={`/r/${sub.name}`}>
+                    <a>
                       <Image
                         src={sub.imageUrl}
                         alt="Sub"
-                        width={(7 * 16) / 4}
+                        width={(6 * 16) / 4}
                         height={(6 * 16) / 4}
+                        className="rounded-full cursor-pointer"
                       />
-                    </Link>
-                  </div>
+                    </a>
+                  </Link>
                   <Link href={`/r/${sub.name}`}>
                     <a className="font-bold hover:cursor-pointer">
                       /r/{sub.name}
@@ -55,6 +59,15 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            {authenticated && (
+              <div className="p-4 border-t-2">
+                <Link href="/subs/create">
+                  <a className="w-full px-2 py-1 green button">
+                    Create Community
+                  </a>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

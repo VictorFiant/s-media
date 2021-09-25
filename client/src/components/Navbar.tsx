@@ -54,7 +54,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-x-0 top-0 z-10 flex items-center justify-center h-12 px-5 bg-white">
+    <div className="fixed inset-x-0 top-0 z-10 flex items-center justify-between h-12 px-5 bg-white">
       {/** Logo  */}
       <div className="flex items-center">
         <Link href="/">
@@ -62,50 +62,53 @@ const Navbar: React.FC = () => {
             <Logo className="w-8 h-8 mr-2" />
           </a>
         </Link>
-        <span className="font-semibold text-2x1 ">
+        <span className="hidden font-semibold text-2x1 lg:block">
           <Link href="/">R€@Di7</Link>
         </span>
       </div>
       {/** Search Input */}
-      <div className="relative flex items-center mx-auto bg-gray-100 border rounded">
-        <i className="pl-3 pr-3 text-gray-600 fas fa-search"></i>
-        <input
-          type="text"
-          className="py-1 pr-3 bg-transparent rounded focus:outline-none w-160"
-          placeholder="Search"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <div
-          className="absolute left-0 right-0 bg-white"
-          style={{ top: "100%" }}
-        >
-          {subs?.map((sub) => (
-            <div
-              className="flex items-center px-4 py-3 cursor-pointer hover:border-gray-200"
-              onClick={() => goToSub(sub.name)}
-            >
-              <Image
-                src={sub.imageUrl}
-                className="rounded-full"
-                alt="Sub"
-                height={(8 * 16) / 4}
-                width={(8 * 16) / 4}
-              />
-              <div className="ml-4 text-sm">
-                <p className="font-medium">{sub.name}</p>
-                <p className="text-gray-600">{sub.title}</p>
+      <div className="max-w-full px-4 w-160">
+        <div className="relative flex items-center bg-gray-100 border rounded">
+          <i className="pl-3 pr-3 text-gray-600 fas fa-search"></i>
+          <input
+            type="text"
+            className="py-1 pr-3 bg-transparent rounded focus:outline-none "
+            placeholder="Search"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <div
+            className="absolute left-0 right-0 bg-white"
+            style={{ top: "100%" }}
+          >
+            {subs?.map((sub) => (
+              <div
+                className="flex items-center px-4 py-3 cursor-pointer hover:border-gray-200"
+                onClick={() => goToSub(sub.name)}
+              >
+                <Image
+                  src={sub.imageUrl}
+                  className="rounded-full"
+                  alt="Sub"
+                  height={(8 * 16) / 4}
+                  width={(8 * 16) / 4}
+                />
+                <div className="ml-4 text-sm">
+                  <p className="font-medium">{sub.name}</p>
+                  <p className="text-gray-600">{sub.title}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
+
       {/** Auth Button */}
       <div className="flex">
         {!loading &&
           (authenticated ? (
             <button
-              className="w-32 py-1 mr-4 leading-6 hollow green button"
+              className="hidden w-20 py-1 mr-4 leading-6 lg:w-32 hollow green button sm:block"
               onClick={logout}
             >
               LogOut
@@ -113,12 +116,14 @@ const Navbar: React.FC = () => {
           ) : (
             <Fragment>
               <Link href="/login">
-                <a className="w-32 py-1 mr-4 leading-6 hollow green button">
+                <a className="hidden w-20 py-1 mr-4 leading-6 lg:w-32 hollow green button sm:block">
                   Login
                 </a>
               </Link>
               <Link href="/register">
-                <a className="w-32 py-1 leading-6 green button">Sign-Up</a>
+                <a className="hidden w-20 py-1 leading-6 lg:w-32 green button sm:block">
+                  Sign-Up
+                </a>
               </Link>
             </Fragment>
           ))}
