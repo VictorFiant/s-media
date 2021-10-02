@@ -11,13 +11,14 @@ import classNames from "classnames";
 import { useAuthState } from "../../../../context/auth";
 import Sidebar from "../../../../components/Sidebar";
 import ActionButton from "../../../../components/ActionButton";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 
 dayjs.extend(relativeTime);
 
 function PostPage() {
   // Local State
   const [newComment, setNewComment] = useState("");
+  const [description, setDescription] = useState("");
   //Global state
   const { authenticated, user } = useAuthState();
   //Utils
@@ -32,6 +33,13 @@ function PostPage() {
     identifier && slug ? `/posts/${identifier}/${slug}/comments` : null
   );
   if (error) router.push("/");
+
+  useEffect(() => {
+    if (!post) return;
+    let desc = post.body || post.title;
+    desc = desc.substring(0, 158).concat(".."); //Hello world
+    setDescription(desc);
+  }, [post]);
 
   const vote = async (value: number, comment?: Comment) => {
     // if not logged in go to login
@@ -59,7 +67,7 @@ function PostPage() {
     event.preventDefault();
     if (newComment.trim() === "") return;
     try {
-      await Axios.post(`/posts/${post?.identifier}/${post.slug}/comments`, {
+      await Axios.post(`/posts/${post?.identifier}/${post?.slug}/comments`, {
         body: newComment,
       });
 
@@ -74,6 +82,11 @@ function PostPage() {
     <>
       <Head>
         <title>{post?.title}</title>
+        <meta name="description" content={description}></meta>
+        <meta property="og:description" content={description}></meta>
+        <meta property="og:title" content={post?.title}></meta>
+        <meta property="twitter:description" content={description}></meta>
+        <meta property="twitter:title" content={post?.title}></meta>
       </Head>
       <Link href={`/r/${sub}`}>
         <a>

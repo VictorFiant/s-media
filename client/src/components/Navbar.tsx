@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
           </a>
         </Link>
         <span className="hidden font-semibold text-2x1 lg:block">
-          <Link href="/">R€@Di7</Link>
+          <Link href="/">ReadHub</Link>
         </span>
       </div>
       {/** Search Input */}

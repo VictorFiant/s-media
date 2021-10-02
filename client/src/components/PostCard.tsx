@@ -28,12 +28,15 @@ export default function PostCard({
     username,
     commentCount,
     url,
+    sub,
   },
   revalidate,
 }: PostCardProps) {
   const { authenticated } = useAuthState();
 
   const router = useRouter();
+
+  const isInSubPage = router.pathname === "/r/[sub]"; // /r/[sub]
 
   const vote = async (value) => {
     if (!authenticated) router.push("/login");
@@ -88,19 +91,23 @@ export default function PostCard({
       {/** Post data section */}
       <div className="w-full p-2">
         <div className="flex items-center">
-          <Link href={`/r/${subName}`}>
-            <img
-              src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=robohash&f=y"
-              className="w-6 h-6 mr-1 rounded-full cursor-pointer "
-            />
-          </Link>
-          <Link href={`/r/${subName}`}>
-            <a className="text-xs font-bold cursor-pointer hover:underline">
-              /r/{subName}
-            </a>
-          </Link>
+          {!isInSubPage && (
+            <>
+              <Link href={`/r/${subName}`}>
+                <img
+                  src={sub?.imageUrl}
+                  className="w-6 h-6 mr-1 rounded-full cursor-pointer "
+                />
+              </Link>
+              <Link href={`/r/${subName}`}>
+                <a className="text-xs font-bold cursor-pointer hover:underline">
+                  /r/{subName}
+                </a>
+              </Link>
+              <span className="mx-1 text-xs text-gray-600">~</span>
+            </>
+          )}
           <p className="text-xs text-gray-600">
-            <span className="mx-1">~</span>
             Posted by
             <Link href={`/u/${username}`}>
               <a className="mx-1 hover:underline">/u/{username}</a>

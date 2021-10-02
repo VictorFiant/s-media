@@ -12,6 +12,10 @@ export default function Home() {
   //const { data: posts } = useSWR<Post[]>("/posts");
   const { data: topSubs } = useSWR<Sub[]>("/misc/top-subs");
 
+  const description =
+    "ReadHub is a network of communities based on people's interests. Find communities you are interested in, and become part of an online community!";
+  const title = "ReadHuber...--// the front page of the internet!";
+
   const { authenticated } = useAuthState();
 
   const {
@@ -24,7 +28,7 @@ export default function Home() {
   } = useSWRInfinite<Post[]>((index) => `/posts?page=${index}`, {
     revalidateAll: true,
   });
-
+  const isInitialLoading = !data && !error;
   const posts: Post[] = data ? [].concat(...data) : [];
 
   useEffect(() => {
@@ -56,12 +60,19 @@ export default function Home() {
   return (
     <Fragment>
       <Head>
-        <title>R€@Di7er...--// the front page of the internet</title>
+        <title>{title}</title>
+        <meta name="description" content={description}></meta>
+        <meta property="og:description" content={description}></meta>
+        <meta property="og:title" content={title}></meta>
+        <meta property="twitter:description" content={description}></meta>
+        <meta property="twitter:title" content={title}></meta>
       </Head>
       <div className="container flex pt-4">
         {/** Posts  feed */}
         <div className="w-full px-4 md:w-160 md:p-0">
-          {isValidating && <p className="text-lg text-center">Loading...</p>}
+          {isInitialLoading && (
+            <p className="text-lg text-center">Loading...</p>
+          )}
           {posts?.map((post: Post) => (
             <PostCard
               post={post}
