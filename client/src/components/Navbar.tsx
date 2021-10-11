@@ -11,6 +11,7 @@ const Navbar: React.FC = () => {
   const [name, setName] = useState("");
   const [subs, setSubs] = useState<Sub[]>([]);
   const [timer, setTimer] = useState(null);
+  
   const { authenticated, loading } = useAuthState();
   const dispatch = useAuthDispatch();
 
@@ -81,7 +82,7 @@ const Navbar: React.FC = () => {
             className="absolute left-0 right-0 bg-white"
             style={{ top: "100%" }}
           >
-            {subs?.map((sub) => (
+            {subs?.map((sub: any) => (
               <div
                 className="flex items-center px-4 py-3 cursor-pointer hover:border-gray-200"
                 onClick={() => goToSub(sub.name)}

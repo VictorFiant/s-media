@@ -22,7 +22,7 @@ export interface User {
     updateAt: string
 }
 
-export interface Sub {
+export interface Sub  {
     createdAt: string,
     updatedAt: string,
     name: string,

@@ -14,6 +14,6 @@ module.exports = {
   webpack5: false,
 
   images: {
-    domains: ['www.gravatar.com', 'localhost'],
+    domains: ['www.gravatar.com', process.env.APP_DOMAIN],
   },
 }
