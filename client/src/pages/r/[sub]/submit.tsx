@@ -17,7 +17,7 @@ function submit() {
   const { data: sub, error } = useSWR<Sub>(subName ? `/subs/${subName}` : null);
   if (error) router.push("/");
 
-  const submitPost = async (event: FormEvent) => {
+  const submitPost = async (event: React.FormEvent) => {
     event.preventDefault();
 
     if (title.trim() === "") return;

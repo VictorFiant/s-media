@@ -9,7 +9,7 @@ import InputGroup from "../components/InputGroup";
 export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState<any>({});
+  const [errors, setErrors] = useState({});
 
   const dispatch = useAuthDispatch();
   const { authenticated } = useAuthState();
@@ -55,7 +55,7 @@ export default function Register() {
               type="username"
               value={username}
               placeholder="USERNAME"
-              error={errors.username}
+              error={username}
               setValue={setUsername}
             />
             <InputGroup
@@ -63,7 +63,7 @@ export default function Register() {
               type="password"
               value={password}
               placeholder="PASSWORD"
-              error={errors.password}
+              error={password}
               setValue={setPassword}
             />
             <button className="w-full py-2 mb-4 text-xs font-bold text-white uppercase bg-green-600 border border-black rounded">

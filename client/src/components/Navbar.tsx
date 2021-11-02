@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 
 const Navbar: React.FC = () => {
   const [name, setName] = useState("");
-  const [subs, setSubs] = useState<Sub[]>([]);
+  const [subs, setSubs] = useState([]);
   const [timer, setTimer] = useState(null);
   
   const { authenticated, loading } = useAuthState();

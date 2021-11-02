@@ -13,7 +13,7 @@ interface Action {
   payload: any;
 }
 
-const StateContext = createContext<State>({
+const StateContext = createContext({
   authenticated: false,
   user: null,
   loading: true,

@@ -4,32 +4,32 @@ import Document, {
   Main,
   NextScript,
   DocumentContext,
-} from "next/document";
+} from 'next/document'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+    const initialProps = await Document.getInitialProps(ctx)
+    return { ...initialProps }
   }
 
   render() {
     return (
       <Html>
         <Head>
-          <title>ReadHub</title>
+          <title>Readit</title>
           <link rel="icon" type="image/svg+xml" href="/reddit.svg" />
-          <meta property="og:site_name" content="readhub"></meta>
-          {/* <meta property="og:site_name" content="@readhub"></meta> */}
-          <meta property="twitter:card" content="summary"></meta>
-          <meta property="og:type" content="website"></meta>
+          <meta property="og:site_name" content="readit"  />
+          {/* <meta property="twitter:site" content="@readit" /> */}
+          <meta property="twitter:card" content="summary" />
+          <meta property="og:type" content="website" />
           <meta
             property="og:image"
-            content="{`${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}/reddit.svg`}"
-          ></meta>
+            content={`${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}/reddit.svg`}
+          />
           <meta
             property="twitter:image"
-            content="{`${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}/reddit.svg`}"
-          ></meta>
+            content={`${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}/reddit.svg`}
+          />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
             href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600&display=swap"
@@ -42,13 +42,13 @@ class MyDocument extends Document {
             crossOrigin="anonymous"
           />
         </Head>
-        <body className="font-body" style={{ backgroundColor: "#DAE0E6" }}>
+        <body className="font-body" style={{ backgroundColor: '#DAE0E6' }}>
           <Main />
           <NextScript />
         </body>
       </Html>
-    );
+    )
   }
 }
 
-export default MyDocument;
+export default MyDocument

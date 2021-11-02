@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { ChangeEvent, createRef, Fragment, useEffect, useState } from "react";
+import { ChangeEvent , createRef, Fragment, useEffect, useState } from "react";
 import useSWR from "swr";
 import PostCard from "../../components/PostCard";
 import Sidebar from "../../components/Sidebar";
@@ -10,6 +10,7 @@ import classNames from "classnames";
 import { Sub } from "../../types";
 import { useAuthState } from "../../context/auth";
 import Axios from "axios";
+
 
 export default function SubPage() {
   // Local state
@@ -35,16 +36,16 @@ export default function SubPage() {
 
   const openFileInput = (type: string) => {
     if (!ownSub) return;
-    fileInputRef.current!.name = type;
-    fileInputRef.current?.click();
+    fileInputRef.current.name = type;
+    fileInputRef.current.click();
   };
 
-  const uploadImage = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files![0];
+  const uploadImage = async (event:  ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files[0];
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("type", fileInputRef.current!.name);
+    formData.append("type", fileInputRef.current.name);
 
     try {
       await Axios.post<Sub>(`/subs/${sub?.name}/image`, formData, {

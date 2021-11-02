@@ -25,11 +25,10 @@ export default function Home() {
     setSize: setPage,
     isValidating,
     revalidate,
-  } = useSWRInfinite<Post[]>((index) => `/posts?page=${index}`, {
-    revalidateAll: true,
-  });
+  } = useSWRInfinite<Post[]>((index) => `/posts?page=${index}`)
+  
   const isInitialLoading = !data && !error;
-  const posts: Post[] = data ? [].concat(...data) : [];
+  const posts: Post[] = data ? ([] as any[]).concat(...data): [];
 
   useEffect(() => {
     if (!posts || posts.length === 0) return;
@@ -38,7 +37,7 @@ export default function Home() {
 
     if (id !== observedPost) {
       setObservedPost(id);
-      observeElement(document.getElementById(id));
+      observeElement(document.getElementById(id)!);
     }
   }, [posts]);
 
