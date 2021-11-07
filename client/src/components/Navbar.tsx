@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
   const [name, setName] = useState("");
   const [subs, setSubs] = useState([]);
   const [timer, setTimer] = useState(null);
-  
+
   const { authenticated, loading } = useAuthState();
   const dispatch = useAuthDispatch();
 
