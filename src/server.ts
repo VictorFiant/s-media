@@ -17,7 +17,7 @@ import userRoutes from './routes/users';
 import trim from "./middleware/trim";
 
 const app = express();
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT 
 
 
 app.use(express.json());
