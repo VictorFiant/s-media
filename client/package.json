@@ -8,10 +8,13 @@
     "start": "next start"
   },
   "dependencies": {
+    "@svgr/webpack": "^6.1.1",
+    "@types/babel__core": "^7.1.16",
+    "ast-types": "^0.14.2",
     "autoprefixer": "^10.2.6",
     "axios": "^0.21.1",
     "dayjs": "^1.10.6",
-    "next": "^11.1.2",
+    "next": "^12.0.7",
     "postcss": "^8.3.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -19,7 +22,6 @@
     "tailwindcss": "^2.2.4"
   },
   "devDependencies": {
-    "@svgr/webpack": "^5.5.0",
     "@types/classnames": "^2.3.1",
     "@types/node": "^16.10.9",
     "@types/react": "^17.0.11",

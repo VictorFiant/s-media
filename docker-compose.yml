@@ -9,4 +9,3 @@ services:
       POSTGRES_USER: "root"
       POSTGRES_PASSWORD: "admin"
       POSTGRES_DB: "media"
-
