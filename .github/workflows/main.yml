@@ -16,7 +16,7 @@ jobs:
             git pull
             npm install
             npx tsc
-            
+            cd client
             npm run build
             pm2 restart server client
           host: ${{ secrets.HOST }}
