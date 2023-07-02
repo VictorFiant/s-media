@@ -5,3 +5,12 @@ build/
 tmp/
 temp/
 /**/*.env
+# Local .terraform directories
+**/.terraform/*
+# .tfstate files
+*.tfstate
+*.tfstate.*
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+main.tf
